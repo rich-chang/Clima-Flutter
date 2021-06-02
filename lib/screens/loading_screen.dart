@@ -14,17 +14,34 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement deactivate
+    super.initState();
+
+    print("initState");
+    getLocation();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("build");
     return Scaffold(
       body: Center(
         child: RaisedButton(
           onPressed: () {
             //Get the current location
-            getLocation();
+            //getLocation();
           },
           child: Text('Get Location'),
         ),
       ),
     );
+  }
+
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+    super.deactivate();
+    print("deactivate");
   }
 }
