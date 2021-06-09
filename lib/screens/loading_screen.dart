@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:clima/services/location.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +25,19 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     if (response.statusCode == 200) {
       String data = response.body;
-      print(data);
+      var decodeData = jsonDecode(data);
+
+      var long = decodeData['coord']['lon'];
+      var weatherDesc = decodeData['weather'][0]['description'];
+      var id = decodeData['weather'][0]['id'];
+      var temp = decodeData['main']['temp'];
+      var city = decodeData['name'];
+      
+      print(long);
+      print(weatherDesc);
+      print(id);
+      print(temp);
+      print(city);
     } else {
       print(response.statusCode);
     }
@@ -33,15 +47,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     // TODO: implement deactivate
     super.initState();
-
     print("initState");
     getLocation();
-    getWeatherData();
   }
 
   @override
   Widget build(BuildContext context) {
     print("build");
+    getWeatherData();
+
     return Scaffold(
       body: Center(
         child: RaisedButton(
