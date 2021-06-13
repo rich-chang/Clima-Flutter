@@ -19,12 +19,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
     print("getLocation");
     LocationService ls = LocationService();
     await ls.getCurrentLocation();
-    longitude = ls.longitude;
-    latitude = ls.latitude;
 
     NetworkHelper networkHelp = NetworkHelper(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
-    var weatherData = networkHelp.getData();
+        'https://api.openweathermap.org/data/2.5/weather?lat=${ls.latitude}&lon=${ls.longitude}&units=metric&appid=$apiKey');
+    var weatherData = await networkHelp.getData();
 
     //Future.delayed(Duration(milliseconds: 0), () {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
