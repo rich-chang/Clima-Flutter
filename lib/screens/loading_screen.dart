@@ -1,6 +1,7 @@
 import 'package:clima/services/location.dart';
 import 'package:clima/services/networking.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 const String apiKey = '1e72f5a0c48844a09ba5f2202930470c';
 
@@ -51,13 +52,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     return Scaffold(
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            getLocationData();
-          },
-          child: Text('Get Location'),
-        ),
-      ),
+          child: SpinKitDoubleBounce(
+        color: Colors.white,
+        size: 100.0,
+      )),
     );
   }
 
