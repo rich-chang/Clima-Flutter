@@ -6,6 +6,14 @@ const String apiKey = '1e72f5a0c48844a09ba5f2202930470c';
 
 class WeatherModel {
 
+  Future<dynamic> getCityWeather(String cityName) async {
+    NetworkHelper networkHelp = NetworkHelper(
+        '$apuUrl?q=$cityName&units=metric&appid=$apiKey');
+    var weatherData = await networkHelp.getData();
+
+    return weatherData;
+  }
+
   Future<dynamic> getWeatherData() async {
     LocationService ls = LocationService();
     await ls.getCurrentLocation();
